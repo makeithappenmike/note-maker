@@ -13,18 +13,20 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-// Bring in Routes
-const apiRoutes = require('./routes/apiRoutes.js');
-const htmlRoutes = require('./routes/htmlRoutes.js');
-
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+// GET Route for notes page
+app.get('/notes', (req, res) => {
+console.info(`${req.method} request received for index`);
+  res.sendFile(path.join(__dirname, '/public/notes.html'))
+});
+
 // Use Routes
 app.use('/api', api);
 
-app.listen(PORT, () =>
+app.listen(PORT, () => {
   console.log(`App listening at http://localhost:${PORT} 🚀`)
-);
+});
