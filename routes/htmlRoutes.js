@@ -2,6 +2,7 @@ const router = require("express").Router();
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
+const uuid = require('../helpers/uuid');
 
 // GET Route for homepage
 router.get('/', (req, res) =>
