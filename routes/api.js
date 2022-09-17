@@ -20,12 +20,23 @@ app.get('/notes', (req, res) => {
 // POST Route for submitting notes
 app.post('/notes', (req, res) => {
 
-    console.log("Click");
+    console.info(`${req.method} request received for notes`);
   
     // If all the required properties are present
     if (req) {
-  
-      console.log("Response Body:", req.body);
+        const title = req.body.title;
+        const text = req.body.text;
+        const allNotes =  [];
+        console.log("Response Body:", req.body);
+        console.log("Title:", title);
+        console.log("Text:", text);
+
+        // Create noteAdded object
+        const noteAdded = {
+            title: title,
+            text: text
+        };
+        allNotes.push(noteAdded);
   
     //   res.json(res);
     } else {
