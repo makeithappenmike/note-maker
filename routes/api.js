@@ -3,8 +3,8 @@ const uuid = require('../helper/uuid');
 
 
 // Bring in Routes
-const apiRoutes = require('./routes/apiRoutes.js');
-const htmlRoutes = require('./routes/htmlRoutes.js');
+const apiRoutes = require('./apiRoutes.js');
+const htmlRoutes = require('./htmlRoutes.js');
 
 const app = express();
 

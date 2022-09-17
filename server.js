@@ -21,10 +21,9 @@ const htmlRoutes = require('./routes/htmlRoutes.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use('/api', api);
 
 // Use Routes
-app.use();
+app.use('/api', api);
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
