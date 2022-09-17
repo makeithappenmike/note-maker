@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const util = require('util');
 const db = require('./db/db.json');
+const api = require('./routes/api.js');
 
 // Helper method for generating unique ids
 const uuid = require('./helper/uuid');
