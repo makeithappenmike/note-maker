@@ -18,37 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
-// GET Route for homepage
-app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, './public/index.html'))
-);
-
-// GET Route for notes.html
-app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, './public/notes.html'))
-);
-
-// POST Route for submitting feedback
-app.post('/api/notes', (req, res) => {
-  // Destructuring assignment for the items in req.body
-  const responseBody = req.body;
-
-  // If all the required properties are present
-  if (req) {
-
-    console.log("Response Body:", req);
-
-    const response = {
-      status: 'success',
-      body: newFeedback,
-    };
-
-    res.json(response);
-  } else {
-    res.json('Error in posting feedback');
-  }
-});
-
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
