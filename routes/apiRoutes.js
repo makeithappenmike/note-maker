@@ -1,13 +1,10 @@
-const express = require('express');
+const router = require("express").Router();
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
 
-// Helper method for generating unique ids
-const uuid = require('./helper/uuid');
-
 // POST Route for submitting feedback
-app.post('/api/notes', (req, res) => {
+router.post('/api/notes', (req, res) => {
     // Destructuring assignment for the items in req.body
     const responseBody = req.body;
   
@@ -26,3 +23,5 @@ app.post('/api/notes', (req, res) => {
       res.json('Error in posting feedback');
     }
   });
+
+  module.exports = router;

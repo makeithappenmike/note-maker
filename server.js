@@ -4,18 +4,20 @@ const fs = require('fs');
 const util = require('util');
 
 // Helper method for generating unique ids
-const uuid = require('./helper/uuid');
+// const uuid = require('./helper/uuid');
 
 // Needed for Heroku
 const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+// Bring in Routes
+const apiRoutes = require('./routes/apiRoutes.js');
+const htmlRoutes = require('./routes/htmlRoutes.js');
+
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use('/api', api);
-
 app.use(express.static('public'));
 
 app.listen(PORT, () =>
