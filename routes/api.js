@@ -1,5 +1,5 @@
 const express = require('express');
-const uuid = require('../helpers/uuid');
+const uuid = require('../helper/uuid');
 
 
 // Bring in Routes

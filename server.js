@@ -5,7 +5,7 @@ const util = require('util');
 const db = require('./db/db.json');
 
 // Helper method for generating unique ids
-// const uuid = require('./helper/uuid');
+const uuid = require('./helper/uuid');
 
 // Needed for Heroku
 const PORT = process.env.PORT || 3001;

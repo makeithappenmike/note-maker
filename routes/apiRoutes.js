@@ -2,7 +2,7 @@ const router = require("express").Router();
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
-const uuid = require('../helpers/uuid');
+const uuid = require('../helper/uuid');
 
 // POST Route for submitting feedback
 router.post('/api/notes', (req, res) => {
