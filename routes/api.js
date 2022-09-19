@@ -13,49 +13,42 @@ const app = express();
 // app.use('/api', apiRoutes);
 // app.use('/', htmlRoutes);
 
-// Fallback route for when a user attempts to visit routes that don't exist
-app.get('*', (req, res) =>
-  res.send(
-    `Make a GET request using to <a href="http://localhost:${PORT}/api/notes">http://localhost:${PORT}/api/notes</a>`
-  )
-);
-
 // GET Route for retrieving all Notes
 app.get('/notes', (req, res) => {
+  console.log(req.params);
   console.info(`${req.method} request received for notes on api.js`);
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
 // GET route that returns a note by id
-app.get('/api/notes/:id', (req, res) => {
-  // Coerce the specific search term to lowercase
-  const idQueried = req.params.id.toLowerCase();
+app.get('/notes/:id', (req, res) => {
 
-  // Iterate through the terms name to check if it matches `req.params.term`
+  const requestedNote = req.params.id;
+  console.log(requestedNote);
   for (let i = 0; i < db.length; i++) {
-    if (idQueried === db[i].id.toLowerCase()) {
+    if (requestedNote === db[i].id) {
       return res.json(db[i]);
     }
   }
 
-  // Return a message if the term doesn't exist in our DB
-  return res.json('No match found');
+  // Return a message if the note doesn't exist in our DB
+  return res.json('Note not found');
 });
 
 // DELETE route
-app.delete('/api/notes/:id', (req, res) => {
-  // Coerce the specific search term to lowercase
-  const requestedTerm = req.params.term.toLowerCase();
+app.delete('/notes/:id', (req, res) => {
 
-  // Iterate through the terms name to check if it matches `req.params.term`
-  for (let i = 0; i < termData.length; i++) {
-    if (requestedTerm === termData[i].term.toLowerCase()) {
-      return res.json(termData[i]);
+  console.info(`${req.method} request received for notes on api.js`);
+
+  
+  const requestedNote = req.params.id;
+  console.log(requestedNote);
+  for (let i = 0; i < db.length; i++) {
+    if (requestedNote === db[i].id) {
+      return res.json(db[i]);
     }
   }
 
-  // Return a message if the term doesn't exist in our DB
-  return res.json('No match found');
 });
 
 // POST Route for submitting notes
