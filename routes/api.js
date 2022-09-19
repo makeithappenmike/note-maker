@@ -40,8 +40,37 @@ app.delete('/notes/:id', (req, res) => {
 
   console.info(`${req.method} request received for notes on api.js`);
 
-  
   const requestedNote = req.params.id;
+
+  console.log("Clicked:", requestedNote);
+
+  console.log(typeof(db.toString()));
+
+  fs.readFile('./db/db.json', 'utf8', (err, data) => {
+
+      const parsedData = JSON.parse(data);
+      console.log("Read File:", parsedData);
+
+    // var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    
+    for(var i = 0; i < data.length; i++){ 
+      console.log(parsedData[i]);
+      if ( parsedData[i] === requestedNote) { 
+        parsedData.splice(i, 1); 
+      }
+    }
+
+    if (err) {
+      console.error(err);
+
+    } else {
+      // const parsedData = JSON.parse(data);
+      // parsedData.push(content);
+      // writeToFile(file, parsedData);
+      console.log("Success");
+    }
+  });
+  
   console.log(requestedNote);
   for (let i = 0; i < db.length; i++) {
     if (requestedNote === db[i].id) {
