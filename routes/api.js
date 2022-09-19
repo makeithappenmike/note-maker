@@ -1,6 +1,7 @@
 const express = require('express');
 const uuid = require('../helper/uuid');
-
+const { readFromFile, readAndAppend } = require('../helper/fsUtils');
+const fs = require('fs');
 
 // Bring in Routes
 const apiRoutes = require('./apiRoutes.js');
@@ -14,6 +15,7 @@ app.use('/', htmlRoutes);
 // GET Route for notes.html
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/notes.html'));
+    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
     console.info(`${req.method} request received for notes api.js`);
   });
 
@@ -36,7 +38,15 @@ app.post('/notes', (req, res) => {
             title: title,
             text: text
         };
-        allNotes.push(noteAdded);
+
+        // allNotes.push(noteAdded);
+
+        console.log("Note Added:", typeof(JSON.stringify(noteAdded)));
+
+
+
+        readAndAppend(noteAdded, './db/db.json');
+        res.json(`Note added successfully 🚀`);
   
     //   res.json(res);
     } else {

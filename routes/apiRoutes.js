@@ -4,8 +4,6 @@ const uuid = require('../helper/uuid');
 // POST Route for submitting notes
 router.post('/notes', (req, res) => {
 
-    console.log("Click");
-
     // Destructuring assignment for the items in req.body
     const responseBody = req.body;
   
