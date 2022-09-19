@@ -10,7 +10,7 @@ const readFromFile = util.promisify(fs.readFile);
  *  @returns {void} Nothing
  */
 const writeToFile = (destination, content) =>
-  fs.appendFile(destination, JSON.stringify(content, null, 4), (err) =>
+  fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
     err ? console.error(err) : console.info(`\nData written to ${destination}`)
   );
 /**
@@ -22,12 +22,21 @@ const writeToFile = (destination, content) =>
 const readAndAppend = (content, file) => {
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
-      console.error(err);
+      console.error("Error:", err);
     } else {
-      // const parsedData = JSON.parse(data);
-      const parsedData = [];
-      parsedData.push(content);
-      writeToFile(file, parsedData);
+      const dataArray = [];
+      console.log("Data:", data);
+      console.log("Data String", JSON.parse(data));
+      // data.push(content);
+      console.log("Content:", content);
+      dataArray.push(JSON.parse(data));
+      dataArray.push(content);
+      console.log("Data Array Type:", typeof(dataArray));
+      console.log("Data Array:", dataArray);
+      // const parsedData = JSON.parse(content);
+      // const parsedData = [];
+      // parsedData.push(content);
+      writeToFile(file, dataArray);
     }
   });
 };
