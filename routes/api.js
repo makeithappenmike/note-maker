@@ -1,6 +1,6 @@
 const express = require('express');
 const uuid = require('../helper/uuid');
-const { readFromFile, readAndAppend } = require('../helper/fsUtils');
+const { writeToFile, readFromFile, readAndAppend } = require('../helper/fsUtils');
 const fs = require('fs');
 const db = require('../db/db.json');
 
@@ -50,15 +50,18 @@ app.delete('/notes/:id', (req, res) => {
 
       const parsedData = JSON.parse(data);
       console.log("Read File:", parsedData);
+      console.log("Length:", parsedData.length);
 
     // var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     
-    for(var i = 0; i < data.length; i++){ 
-      console.log(parsedData[i]);
-      if ( parsedData[i] === requestedNote) { 
-        parsedData.splice(i, 1); 
+    for (var i = 0; i < parsedData.length; i++){ 
+      console.log("Looped Data", parsedData[i].id);
+      if ( parsedData[i].id === requestedNote) { 
+        parsedData.splice(requestedNote, 1); 
       }
     }
+
+    console.log("Parsed Data:", parsedData);
 
     if (err) {
       console.error(err);
@@ -66,7 +69,7 @@ app.delete('/notes/:id', (req, res) => {
     } else {
       // const parsedData = JSON.parse(data);
       // parsedData.push(content);
-      // writeToFile(file, parsedData);
+      writeToFile('./db/db.json', parsedData);
       console.log("Success");
     }
   });
