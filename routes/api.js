@@ -16,13 +16,13 @@ app.use('/', htmlRoutes);
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/notes.html'));
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
-    console.info(`${req.method} request received for notes api.js`);
+    console.info(`${req.method} request received for notes from api.js`);
   });
 
 // POST Route for submitting notes
 app.post('/notes', (req, res) => {
 
-    console.info(`${req.method} request received for notes`);
+    console.info(`${req.method} request received for notes on api.js`);
   
     // If all the required properties are present
     if (req) {
