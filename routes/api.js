@@ -39,12 +39,6 @@ app.post('/notes', (req, res) => {
             text: text
         };
 
-        // allNotes.push(noteAdded);
-
-        console.log("Note Added:", typeof(JSON.stringify(noteAdded)));
-
-
-
         readAndAppend(noteAdded, './db/db.json');
         res.json(`Note added successfully 🚀`);
   
