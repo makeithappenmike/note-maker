@@ -1,34 +1,17 @@
 [
     {
+        "id": "6f04",
         "title": "123",
         "text": "123"
     },
     {
-        "title": "123",
-        "text": "123"
+        "id": "912a",
+        "title": "new notes",
+        "text": "new notes"
     },
     {
-        "title": "456",
-        "text": "456"
-    },
-    {
-        "title": "123",
-        "text": "123"
-    },
-    {
-        "title": "123",
-        "text": "123"
-    },
-    {
-        "title": "123",
-        "text": "123"
-    },
-    {
-        "title": "123",
-        "text": "123"
-    },
-    {
-        "title": "New note",
-        "text": "nte note"
+        "id": "e3c6",
+        "title": "another note",
+        "text": "another notessssss"
     }
 ]

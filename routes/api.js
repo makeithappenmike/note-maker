@@ -12,14 +12,13 @@ const app = express();
 // app.use('/api', apiRoutes);
 // app.use('/', htmlRoutes);
 
-// // GET Route for notes.html
-// app.get('/notes', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../public/notes.html'));
-//     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
-//     console.info(`${req.method} request received for notes from api.js`);
-//   });
-
 // GET Route for retrieving all Notes
+app.get('/notes', (req, res) => {
+  console.info(`${req.method} request received for notes on api.js`);
+  readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+});
+
+// DELETE Route for delete a note
 app.get('/notes', (req, res) => {
   console.info(`${req.method} request received for notes on api.js`);
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
@@ -35,12 +34,11 @@ app.post('/notes', (req, res) => {
         const title = req.body.title;
         const text = req.body.text;
         const allNotes =  [];
-        console.log("Response Body:", req.body);
-        console.log("Title:", title);
-        console.log("Text:", text);
+        const id = uuid();
 
         // Create noteAdded object
         const noteAdded = {
+            id: id,
             title: title,
             text: text
         };
