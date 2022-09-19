@@ -1,16 +1,14 @@
 [
-    [
-        {
-            "title": "dfgh",
-            "text": "fgh"
-        },
-        {
-            "title": "123",
-            "text": "123"
-        }
-    ],
     {
-        "title": "567",
-        "text": "8901"
+        "title": "dfgh",
+        "text": "fgh"
+    },
+    {
+        "title": "123",
+        "text": "123"
+    },
+    {
+        "title": "456",
+        "text": "456"
     }
 ]

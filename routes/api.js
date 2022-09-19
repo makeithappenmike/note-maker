@@ -39,7 +39,7 @@ app.post('/notes', (req, res) => {
             text: text
         };
 
-        console.log("Note Type:", typeof(JSON.stringify(noteAdded)));
+        // console.log("Note Type:", typeof(JSON.stringify(noteAdded)));
         console.log("Note Added:", noteAdded);
         
         readAndAppend(noteAdded, './db/db.json');

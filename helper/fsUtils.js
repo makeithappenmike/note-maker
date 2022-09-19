@@ -22,21 +22,11 @@ const writeToFile = (destination, content) =>
 const readAndAppend = (content, file) => {
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
-      console.error("Error:", err);
+      console.error(err);
     } else {
-      const dataArray = [];
-      console.log("Data:", data);
-      console.log("Data String", JSON.parse(data));
-      // data.push(content);
-      console.log("Content:", content);
-      dataArray.push(JSON.parse(data));
-      dataArray.push(content);
-      console.log("Data Array Type:", typeof(dataArray));
-      console.log("Data Array:", dataArray);
-      // const parsedData = JSON.parse(content);
-      // const parsedData = [];
-      // parsedData.push(content);
-      writeToFile(file, dataArray);
+      const parsedData = JSON.parse(data);
+      parsedData.push(content);
+      writeToFile(file, parsedData);
     }
   });
 };
