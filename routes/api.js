@@ -4,20 +4,26 @@ const { readFromFile, readAndAppend } = require('../helper/fsUtils');
 const fs = require('fs');
 
 // Bring in Routes
-const apiRoutes = require('./apiRoutes.js');
-const htmlRoutes = require('./htmlRoutes.js');
+// const apiRoutes = require('./apiRoutes.js');
+// const htmlRoutes = require('./htmlRoutes.js');
 
 const app = express();
 
-app.use('/api', apiRoutes);
-app.use('/', htmlRoutes);
+// app.use('/api', apiRoutes);
+// app.use('/', htmlRoutes);
 
-// GET Route for notes.html
+// // GET Route for notes.html
+// app.get('/notes', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../public/notes.html'));
+//     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+//     console.info(`${req.method} request received for notes from api.js`);
+//   });
+
+// GET Route for retrieving all Notes
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/notes.html'));
-    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
-    console.info(`${req.method} request received for notes from api.js`);
-  });
+  console.info(`${req.method} request received for notes on api.js`);
+  readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+});
 
 // POST Route for submitting notes
 app.post('/notes', (req, res) => {

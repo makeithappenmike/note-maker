@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const path = require('path');
 const uuid = require('../helper/uuid');
+const { readFromFile, readAndAppend } = require('../helper/fsUtils');
+
 
 // GET Route for homepage
 router.get('/', (req, res) => {
