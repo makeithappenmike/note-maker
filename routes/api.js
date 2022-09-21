@@ -53,6 +53,7 @@ app.delete('/notes/:id', (req, res) => {
     } else {
       writeToFile('./db/db.json', parsedData);
       console.log("File successfully re-written!");
+      readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
     }
   });
 
