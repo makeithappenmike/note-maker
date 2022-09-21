@@ -1,21 +1,14 @@
-const express = require('express');
-const uuid = require('../helper/uuid');
-const { writeToFile, readFromFile, readAndAppend } = require('../helper/fsUtils');
-const fs = require('fs');
-const db = require('../db/db.json');
-
-// Bring in Routes
-// const apiRoutes = require('./apiRoutes.js');
-// const htmlRoutes = require('./htmlRoutes.js');
+const express = require('express'); // Express
+const uuid = require('../helper/uuid'); // ID creation
+const { writeToFile, readFromFile, readAndAppend } = require('../helper/fsUtils'); // Helper files for writing and reading
+const fs = require('fs'); // File storage
+const db = require('../db/db.json'); // Our DB
 
 const app = express();
 
-// app.use('/api', apiRoutes);
-// app.use('/', htmlRoutes);
-
 // GET Route for retrieving all Notes
 app.get('/notes', (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   console.info(`${req.method} request received for notes on api.js`);
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
@@ -33,59 +26,39 @@ app.get('/notes/:id', (req, res) => {
 
   // Return a message if the note doesn't exist in our DB
   return res.json('Note not found');
+
 });
 
-// DELETE route
+// DELETE route that removes a note based on its key
 app.delete('/notes/:id', (req, res) => {
 
   console.info(`${req.method} request received for notes on api.js`);
 
+  // Set the id
   const requestedNote = req.params.id;
 
-  console.log("Clicked:", requestedNote);
-
-  console.log(typeof(db.toString()));
-
+  // Read the db
   fs.readFile('./db/db.json', 'utf8', (err, data) => {
 
-      let parsedData = JSON.parse(data);
-      // const parsedId = parsedData[i].id;
-      console.log("Read File:", parsedData);
-      console.log("Length:", parsedData.length);
-      console.log("requestedNote:", requestedNote);
+    let parsedData = JSON.parse(data);
 
-      parsedData = parsedData.filter((elem) => elem.id !== requestedNote);
-    
-    // for (var i = 0; i < parsedData.length; i++){ 
-    //   console.log("Looped Data", parsedId);
-    //   if ( parsedId === requestedNote) { 
-    //     parsedData.splice(requestedNote, 1); 
-    //   }
-    // }
+    // Filter what pull from the DB to return a new array
+    parsedData = parsedData.filter((elem) => elem.id !== requestedNote);
 
-    console.log("After Parsed Data:", parsedData);
-
+    // Handle errors
     if (err) {
       console.error(err);
 
+    // Re-write file
     } else {
-      // const parsedData = JSON.parse(data);
-      // parsedData.push(content);
       writeToFile('./db/db.json', parsedData);
-      console.log("Success");
+      console.log("File successfully re-written!");
     }
   });
-  
-  console.log("Lower", requestedNote);
-  for (let i = 0; i < db.length; i++) {
-    if (requestedNote === db[i].id) {
-      return res.json(db[i]);
-    }
-  }
 
 });
 
-// POST Route for submitting notes
+// POST Route for adding notes
 app.post('/notes', (req, res) => {
 
     console.info(`${req.method} request received for notes on api.js`);
@@ -94,7 +67,7 @@ app.post('/notes', (req, res) => {
     if (req) {
         const title = req.body.title;
         const text = req.body.text;
-        const id = uuid();
+        const id = uuid(); // This generates our ID
 
         // Create noteAdded object
         const noteAdded = {
@@ -105,6 +78,7 @@ app.post('/notes', (req, res) => {
 
         console.log("Note Added:", noteAdded);
         
+        // Read the DB and write the new note
         readAndAppend(noteAdded, './db/db.json');
         res.json(`Note added successfully 🚀`);
   
