@@ -6,8 +6,6 @@
 ## Description
 Use this tool to keep track of any list! You can add notes, view, and delete them.
 
-Check out an example video [here](INSERT).
-
 <img src="./assets/img/notetaker.png" />
 <br>
 
