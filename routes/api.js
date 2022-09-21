@@ -48,20 +48,22 @@ app.delete('/notes/:id', (req, res) => {
 
   fs.readFile('./db/db.json', 'utf8', (err, data) => {
 
-      const parsedData = JSON.parse(data);
+      let parsedData = JSON.parse(data);
+      // const parsedId = parsedData[i].id;
       console.log("Read File:", parsedData);
       console.log("Length:", parsedData.length);
+      console.log("requestedNote:", requestedNote);
 
-    // var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+      parsedData = parsedData.filter((elem) => elem.id !== requestedNote);
     
-    for (var i = 0; i < parsedData.length; i++){ 
-      console.log("Looped Data", parsedData[i].id);
-      if ( parsedData[i].id === requestedNote) { 
-        parsedData.splice(requestedNote, 1); 
-      }
-    }
+    // for (var i = 0; i < parsedData.length; i++){ 
+    //   console.log("Looped Data", parsedId);
+    //   if ( parsedId === requestedNote) { 
+    //     parsedData.splice(requestedNote, 1); 
+    //   }
+    // }
 
-    console.log("Parsed Data:", parsedData);
+    console.log("After Parsed Data:", parsedData);
 
     if (err) {
       console.error(err);
@@ -74,7 +76,7 @@ app.delete('/notes/:id', (req, res) => {
     }
   });
   
-  console.log(requestedNote);
+  console.log("Lower", requestedNote);
   for (let i = 0; i < db.length; i++) {
     if (requestedNote === db[i].id) {
       return res.json(db[i]);
